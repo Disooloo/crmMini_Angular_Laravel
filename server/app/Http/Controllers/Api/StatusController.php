@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Api\ApiController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Services\Response\ResponseService;
 use App\Services\Status\StatusService;
+use Illuminate\Http\Request;
 
 class StatusController extends ApiController
 {
-
-    public function __construct(StatusService $services)
+    /**
+     * StatusController constructor.
+     */
+    public function __construct(StatusService $service)
     {
-        $this->services = $services;
+        $this->service = $service;
     }
+
 
     /**
      * Display a listing of the resource.
@@ -21,6 +25,14 @@ class StatusController extends ApiController
      */
     public function index()
     {
+        //
+        return ResponseService::sendJsonReponse(
+            true,
+            [
+                'items'=>$this->service->getItems()->toArray()
+            ]
+        );
+
     }
 
     /**

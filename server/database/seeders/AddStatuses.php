@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\supports\Facades\DB;
+use Illuminate\Support\Facades\DB;
 
 class AddStatuses extends Seeder
 {
@@ -14,19 +14,20 @@ class AddStatuses extends Seeder
      */
     public function run()
     {
+        //
         DB::table('statuses')->insert([
             [
-                'title' => 'Новый',
+                'title' => "Новый",
                 'alias' => 'new'
             ],
             [
-                'title' => 'Обработка',
+                'title' => "Обработка",
                 'alias' => 'process'
             ],
             [
-                'title' => 'Завершенной',
+                'title' => "Завершен",
                 'alias' => 'done'
-            ]
+            ],
         ]);
     }
 }

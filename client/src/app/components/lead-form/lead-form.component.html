@@ -1,1 +1,37 @@
-<p>lead-form works!</p>
+<div class="">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label class="form-label">Link</label>
+          <input formControlName="link" type="text"  [ngClass]="{'form-control' : true,'error': f.link.invalid && (f.link.dirty || f.link.touched)}">
+          <div id="emailHelp" class="form-text">Ссылка на лид</div>
+        </div>
+    
+        <div class="row">
+            <div class="col">
+                <select formControlName="category_id" [ngClass]="{'form-select' : true,'error': f.category_id.invalid && (f.category_id.dirty || f.category_id.touched)}" aria-label="Default select example">
+                    <option value="0">Категория</option>
+                    <option *ngFor="let item of categories" [value]="item.id">{{item.title}}</option>
+                </select>
+            </div>
+    
+            <div class="col">
+                <select formControlName="status_id" [ngClass]="{'form-select' : true,'error': f.status_id.invalid && (f.status_id.dirty || f.status_id.touched)}" aria-label="Default select example">
+                    <option value="0">Статус</option>
+                    <option *ngFor="let item of statuses" [value]="item.id">{{item.title}}</option>
+                </select>
+            </div>
+            
+        </div>
+       
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Комментарий лида</label>
+            <textarea formControlName="comment" [ngClass]="{'form-control' : true,'error': f.comment.invalid && (f.comment.dirty || f.comment.touched)}" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+    
+        <div class="mb-3 form-check">
+          <input type="checkbox" formControlName="is_express_delivery" class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">Услуги доставки</label>
+        </div>
+        <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>

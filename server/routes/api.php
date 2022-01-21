@@ -14,6 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::resource('leads', 'Api/LeadController');
-Route::resource('category', 'Api/CategoryController');
-Route::resource('status', 'Api/StatusController');
+Route::resource('leads', 'Api\LeadController');
+Route::resource('statuses', 'Api\StatusController');
+Route::resource('categories', 'Api\CategoryController');

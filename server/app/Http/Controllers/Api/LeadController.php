@@ -2,17 +2,22 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Api\ApiController;
+use App\Http\Controllers\Controller;
+use App\Models\Lead;
 use App\Services\Lead\LeadService;
+use App\Services\Response\ResponseService;
 use Illuminate\Http\Request;
 
 class LeadController extends ApiController
 {
-    public function __construct(LeadService $services)
-    {
-        $this->services = $services;
-    }
 
+    /**
+     * StatusController constructor.
+     */
+    public function __construct(LeadService $service)
+    {
+        $this->service = $service;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -21,6 +26,12 @@ class LeadController extends ApiController
     public function index()
     {
         //
+        return ResponseService::sendJsonReponse(
+            true,
+                [
+                    'items' => $this->service->getItems()->toArray()
+                ]
+        );
     }
 
     /**
@@ -39,9 +50,16 @@ class LeadController extends ApiController
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Lead $lead)
     {
         //
+        $lead = $this->service->store($request, $lead);
+        return ResponseService::sendJsonReponse(
+            true,
+            [
+                'item' => $lead->toArray()
+            ]
+        );
     }
 
     /**
@@ -50,9 +68,14 @@ class LeadController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Lead $lead)
     {
-        //
+        return ResponseService::sendJsonReponse(
+            true,
+            [
+                'item' => $lead->toArray()
+            ]
+        );
     }
 
     /**
@@ -73,9 +96,17 @@ class LeadController extends ApiController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Lead $lead)
     {
         //
+        $lead = $this->service->store($request, $lead);
+
+        return ResponseService::sendJsonReponse(
+            true,
+            [
+                'item' => $lead->toArray()
+            ]
+        );
     }
 
     /**

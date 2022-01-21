@@ -2,22 +2,21 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Api\ApiController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use App\Services\Category\CategoryService;
-
-
-
+use App\Services\Response\ResponseService;
+use Illuminate\Http\Request;
 
 class CategoryController extends ApiController
 {
 
-
-    public function __construct(CategoryService $services)
+    /**
+     * StatusController constructor.
+     */
+    public function __construct(CategoryService $service)
     {
-        $this->services = $services;
+        $this->service = $service;
     }
-
     /**
      * Display a listing of the resource.
      *
@@ -26,6 +25,13 @@ class CategoryController extends ApiController
     public function index()
     {
         //
+        //
+        return ResponseService::sendJsonReponse(
+            true,
+            [
+                'items'=>$this->service->getItems()->toArray()
+            ]
+        );
     }
 
     /**
